@@ -4,7 +4,6 @@
  ## php na versão 7.2 e seu framework na versão 5.8, wampp 2.3 e mysql 5.2 configurações necessárias para rodar o projeto no seu localhost
  ## páginas do sistema:
  ### login - [X]
- ### cadastro de vendedores
  ### cadastro de fornecedores 
  ### cadastro de produtos
  ### cadastro de lojas
@@ -13,13 +12,16 @@
  ### cadastro de clientes
   ### cadastro de funcionários
  ### cadastro de funções
+ ### cadastro de método pagamento
+ ### cadastro de estoque
+
 
  ### gerar relatórios de vendas por vendedores, clientes, lojas.
  
  ## funcionalidade do sistema: 
 
  ### login 
- ### cadastro de vendedores, fornecedores, produtos, , funcionários, funções, lojas, compras, vendas e clientes.
+ ### cadastro de fornecedores, produtos, , funcionários, funções, lojas, compras, vendas, clientes, estoque e metodoPagamento.
  ### gerar relatórios de vendas por vendedores, clientes, lojas.
  
 ## atenção esse projeto encontra-se na fase de desenvolvimento e tem previsão de terminado até dia 30 de setembro.

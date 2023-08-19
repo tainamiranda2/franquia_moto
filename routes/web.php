@@ -11,6 +11,8 @@
 |
 */
 
+//rotar para o controller
+
 Route::get('/', function () {
     return view('welcome');
 });
