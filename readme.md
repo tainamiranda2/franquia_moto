@@ -18,11 +18,40 @@
 
  ### gerar relatórios de vendas por vendedores, clientes, lojas.
  
- ## funcionalidade do sistema: 
+ ## funcionalidade/metodos do sistema: 
 
  ### login 
- ### cadastro de fornecedores, produtos, , funcionários, funções, lojas, compras, vendas, clientes, estoque e metodoPagamento.
- ### gerar relatórios de vendas por vendedores, clientes, lojas.
+ ### cadastro de fornecedores, produtos, funcionários, funções, lojas, compras, vendas, clientes, estoque e metodoPagamento.
+  ### gerar relatórios de vendas por vendedores, clientes, lojas.
+
+ ###  get/fornecedores
+  ###  post/fornecedores
+
+ ###  get/produtos
+  ###  post/produtos
+
+ ###  get/funcionários
+  ###  post/funcionários
+
+ ###  get/funções
+  ###  post/funções
+
+ ###  get/lojas
+  ###  post/lojas
+
+ ###  get/vendas
+  ###  post/vendas
+
+  ###  get/clientes
+ ###  post/clientes
+
+ ###  get/estoque
+  ###  post/estoque
+
+ ###  get/metodoPagamento
+ ###  post/metodoPagamento
+
+ ### get/gerar relatórios de vendas por vendedores, clientes, lojas.
  
 ## atenção esse projeto encontra-se na fase de desenvolvimento e tem previsão de terminado até dia 30 de setembro.
  ### comando para rodar o projeto - php artisan serve
