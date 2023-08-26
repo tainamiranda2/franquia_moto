@@ -57,3 +57,21 @@
  ### comando para rodar o projeto - php artisan serve
  ### comando para criar controller -  php artisan make:controller ClientesController
   ### comando para criar migrations - 
+
+## Getting Started
+
+First, install the package
+
+```bash
+composer install
+```
+
+Second, run the development server:
+
+```bash
+php artisan serve
+```
+
+*Stacks:*
+- PHP 7.1.3
+- Laravel 5.8.
