@@ -66,6 +66,10 @@ First, install the package
 composer install
 ```
 
+configure o .env
+```
+php artisan key:generate
+```
 Second, run the development server:
 
 ```bash
