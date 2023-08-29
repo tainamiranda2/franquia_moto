@@ -24,4 +24,8 @@ Route::get('/home', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::get('/loja', function () {
+    return view('loja');
+});
 //restante das páginas

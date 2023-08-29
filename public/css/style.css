@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Ubuntu:wght@500&display=swap');
 
 body{
-    background-color: #f3f0f0;
+    background-color: #f0f0f0;
 }
 .navbar{
     display: flex;
@@ -87,10 +87,11 @@ text-decoration: none;
 .menu{
     display: inline-flex;
     flex-direction: column;
-    height: 1024px;
+    height: 90vh;
     padding: 28px 42px 98px 20px;
     align-items: flex-start;
-    gap: 10px;
+    gap: 5px;
+    color: #808191;
     background: #FFF;
 }
 
@@ -104,15 +105,16 @@ text-decoration: none;
     padding: 8px 15px;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 2px;
     border-radius: 12px;
-    background: #FCFCFC;
+    background: #fafafa;
 }
 
 .item a{
     align-items: center;
     flex: 1 0 0;
-    color: #808191;
+    
+    color: inherit;
     font-family: Manrope;
     font-size: 15px;
     font-style: normal;
@@ -120,8 +122,26 @@ text-decoration: none;
     line-height: 22px; /* 146.667% */
 }
 
-.item:hover .item a{
-    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
-    background: #DB1313;
+
+.item:hover{
     color: #FFF;
+    background-color: #DB1313;
+}
+.styles{
+    display: flex;
+    flex-direction: row;
+}
+.conteudo{
+    padding: 30px;
+    margin: 10px;
+    width: 50%;
+}
+
+.dados{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: calc(50% - 10px); 
+    border-radius: 10px;
+    margin: 5px;
 }
