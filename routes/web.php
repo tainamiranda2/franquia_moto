@@ -14,7 +14,11 @@
 //rotar para o controller
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
+});
+
+Route::get('/home', function () {
+    return view('home');
 });
 
 Route::get('/login', function () {

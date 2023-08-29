@@ -1,12 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Ubuntu:wght@500&display=swap');
+
+body{
+    background-color: #f3f0f0;
+}
 .navbar{
     display: flex;
     width: 100%;
     padding: 15px 20px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
     background: var(--white-color, #FCFCFC);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30px;
+}
+
+.logo{
+color: var(--text-primary-color, #11142D);
+font-family: Manrope;
+font-size: 25px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-decoration: none;
+}
+.img_home{
+    width: 407px;
+    height: 386.984px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.container{
+    padding-top: 131px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.btn{
+    padding: 17px 83px;
+    margin-top: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 12px;
+    background: #FFF;
+    color: #DB1313;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+    
+}
+
+.btn:hover{
+    background: #DB1313;
+    color: #FFF;
+}
+
+h1{
+    color: #000;
+    font-family: Manrope;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.info{
+    text-align: center;
+    padding: 10px;
+}
+
+a{
+color: var(--text-primary-color, #11142D);
+font-family: Manrope;
+align-items: center;
+font-size: 25px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-decoration: none;
+}
+
+.menu{
+    display: inline-flex;
+    flex-direction: column;
+    height: 1024px;
+    padding: 28px 42px 98px 20px;
+    align-items: flex-start;
+    gap: 10px;
+    background: #FFF;
+}
+
+.item i{
+    width: 25px;
+    height: 25px;
+}
+.item{
+    display: flex;
+    width: 188px;
+    padding: 8px 15px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: #FCFCFC;
+}
+
+.item a{
+    align-items: center;
+    flex: 1 0 0;
+    color: #808191;
+    font-family: Manrope;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 146.667% */
+}
+
+.item:hover .item a{
+    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+    background: #DB1313;
+    color: #FFF;
 }
