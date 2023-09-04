@@ -28,4 +28,16 @@ Route::get('/login', function () {
 Route::get('/loja', function () {
     return view('loja');
 });
+Route::get('/cliente', function () {
+    return view('cliente');
+});
+Route::get('/moto', function () {
+    return view('moto');
+});
+Route::get('/fornecedor', function () {
+    return view('fornecedor');
+});
+Route::get('/venda', function () {
+    return view('venda');
+});
 //restante das páginas

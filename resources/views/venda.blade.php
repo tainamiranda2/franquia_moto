@@ -43,23 +43,23 @@
     </div>
     <div class="conteudo">
         <div class="form">
-            <h1>Loja</h1>
+            <h1>Cliente</h1>
             <div class="dados">
                 <div class="col-md-6 col-md">
-                    <label for="name" class="form-label">Loja:</label>
+                    <label for="name" class="form-label">Nome:</label>
                     <input type="text" class="form-control" id="name" placeholder="Digite o nome da loja">
                 </div>
                 <div class="col-md-6 col-md">
-                    <label for="name" class="form-label">Estado:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Digite o estado">
+                    <label for="name" class="form-label">Telefone:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Digite o nome da loja">
                 </div>
                 <div class="col-md-6 col-md">
-                    <label for="name" class="form-label">Cidade:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Digite a cidade">
+                    <label for="name" class="form-label">Email:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Digite o nome da loja">
                 </div>
                 <div class="col-md-6 col-md">
-                    <label for="name" class="form-label">Bairro:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Digite o bairro">
+                    <label for="name" class="form-label">CPF:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Digite o nome da loja">
                 </div>
             </div>
             <div>
