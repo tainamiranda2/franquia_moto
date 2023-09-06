@@ -2,6 +2,7 @@
 
 body{
     background-color: #f0f0f0;
+    /* overflow: hidden; */
 }
 .navbar{
     display: flex;
@@ -11,6 +12,7 @@ body{
     align-items: center;
     background: var(--white-color, #FCFCFC);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
 }
 
 .logo{
@@ -139,17 +141,6 @@ text-decoration: none;
     display: flex;
     flex-direction: row;
 }
-/* .conteudo{
-    padding: 10px 15px;
-    margin: 30px;
-    max-width: 100%;
-    background-color: #ffffff;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
-} */
 
 .dados{
     display: flex;
@@ -205,7 +196,7 @@ text-decoration: none;
 .col-md{
     padding: 8px 8px 8px 0px;
 }
-.form{
+form{
     padding: 20px;
     margin: 6vh; 
     background-color: #fff;
@@ -215,6 +206,25 @@ text-decoration: none;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 }
 
-@media screen and (max-width: 768px) {
-    /* Estilos para telas menores */
+@media (max-width: 768px) {
+    .menu {
+        padding: 10px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .item {
+        width: auto;
+        padding: 8px 15px;
+        border-radius: 0;
+        background: none;
+    }
+    .bars{
+        width: auto;
+        padding: 8px 15px;
+        border-radius: 0;
+        display: block;
+    }
 }

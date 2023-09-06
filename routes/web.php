@@ -11,33 +11,13 @@
 |
 */
 
+namespace App\Http\Controllers;
+use App\Http\Controllers\LojasController;
+use Illuminate\Support\Facades\Route;
 //rotar para o controller
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/loja', 'LojasController@index')->name('loja');
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::post('/loja', 'LojasController@create')->name('adicionarLoja');
 
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/loja', function () {
-    return view('loja');
-});
-Route::get('/cliente', function () {
-    return view('cliente');
-});
-Route::get('/moto', function () {
-    return view('moto');
-});
-Route::get('/fornecedor', function () {
-    return view('fornecedor');
-});
-Route::get('/venda', function () {
-    return view('venda');
-});
 //restante das páginas

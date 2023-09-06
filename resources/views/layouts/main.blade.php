@@ -7,7 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>@yield('titulo')</title>
-        
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="shortcut icon" href="..\img\Icomoto.png" type="image/x-icon">
         <link rel="stylesheet" href="..\css\reset.css">
         {{-- Fonte do Google --}}
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
@@ -28,6 +30,54 @@
             </nav>
         </header>
     
-    @yield('content')  
+<div class="styles">
+    <div class="menu">
+        <div class="item" id="btnAnalise">
+            <a href="/home">
+                <i class="fa-solid fa-chart-line"></i>
+                Análises
+            </a>
+        </div>
+        <div class="item" id="btnLoja">
+            <a href="/loja">
+            <i class="fa-solid fa-shop"></i>
+            Lojas
+            </a>
+        </div>
+        <div class="item" id="btnCliente">
+            <a href="/cliente">
+            <i class="fa-solid fa-user"></i>
+            Clientes
+            </a>
+        </div>
+        <div class="item" id="btnMoto">
+            <a href="/moto">
+            <i class="fa-solid fa-motorcycle"></i>
+            Motos
+            </a>
+        </div>
+        <div class="item" id="btnVenda">
+            <a href="/venda">
+            <i class="fa-solid fa-bag-shopping"></i>
+            Vendas
+            </a>
+        </div>
+        <div class="item" id="btnFornecedor">
+            <a href="/fornecedor">
+            <i class="fa-solid fa-users"></i>
+            Fornecedores
+            </a>
+        </div>
+        <div class="item" id="btnSair">
+            <a href="/">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Sair
+            </a>
+        </div>
+        <div class="bars" id="btnSair" style="display: none;">
+            <i class="fa-solid fa-bars"></i>
+        </div>
     </div>
-    </body>
+    @yield('content')  
+</div>
+</body>
