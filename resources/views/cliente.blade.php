@@ -9,10 +9,10 @@
         <div class="dados">
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Nome:</label>
-                <input  required ="text" class="form-control" id="loja" name="loja" placeholder="Digite o nome">
+                <input  required ="text" class="form-control" id="cliente" name="cliente" placeholder="Digite o nome">
             </div>
             <div class="col-md-6 col-md">
-                <label for="name" class="form-label">Emal:</label>
+                <label for="name" class="form-label">Email:</label>
                 <input required type="email" class="form-control" id="email" name="email" placeholder="Digite o email">
             </div>
             <div class="col-md-6 col-md">

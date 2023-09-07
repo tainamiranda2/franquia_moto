@@ -34,7 +34,7 @@
 <div class="styles">
     <div class="menu">
         <div class="item" id="btnAnalise">
-            <a href="/home">
+            <a href="/analise">
                 <i class="fa-solid fa-chart-line"></i>
                 Análises
             </a>

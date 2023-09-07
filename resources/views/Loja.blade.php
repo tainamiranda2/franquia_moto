@@ -8,12 +8,12 @@
         <h1>Loja</h1>
         <div class="dados">
             <div class="col-md-6 col-md">
-                <label for="name" class="form-label">Loja:</label>
+                <label for="name" class="form-label">Nome:</label>
                 <input  required ="text" class="form-control" id="loja" name="loja" placeholder="Digite o nome da loja">
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">CEP:</label>
-                <input  required type="text" class="form-control" id="cep" name="cep" placeholder="Digite seu cep">
+                <input  required type="text" class="form-control" id="cep" name="cep" placeholder="Digite o cep">
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Estado:</label>
@@ -29,11 +29,11 @@
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Rua:</label>
-                <input  required type="text" class="form-control" id="rua" name="rua" placeholder="Digite a sua rua">
+                <input  required type="text" class="form-control" id="rua" name="rua" placeholder="Digite a rua">
             </div>
-            <div class="col-md-6 col-md">
+            <div class="col-md-12 col-md">
                 <label for="name" class="form-label">Complemento:</label>
-                <input type="text" class="form-control" id="complemento" name="complemento">
+                <input type="text" class="form-control" id="complemento" name="complemento" placeholder="opcional">
             </div>
         </div>
         <div>
