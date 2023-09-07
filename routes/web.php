@@ -12,6 +12,7 @@
 */
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LojasController;
 use App\Http\Controllers\AnalisesController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 //analises
 Route::get('/home', 'AnalisesController@index');
+
+Route::get('/','LoginController@index');
+
 
 //loja
 Route::get('/loja', 'LojasController@index')->name('loja');
