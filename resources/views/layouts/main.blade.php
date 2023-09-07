@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>@yield('titulo')</title>
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="shortcut icon" href="..\img\Icomoto.png" type="image/x-icon">
         <link rel="stylesheet" href="..\css\reset.css">

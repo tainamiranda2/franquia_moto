@@ -14,6 +14,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LojasController;
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\AnalisesController;
 use Illuminate\Support\Facades\Route;
 //rotar para o controller
@@ -29,4 +30,6 @@ Route::get('/loja', 'LojasController@index')->name('loja');
 
 Route::post('/loja', 'LojasController@create')->name('adicionarLoja');
 
+
+Route::get('/cliente', 'ClientesController@index')->name('cliente');
 //restante das páginas
