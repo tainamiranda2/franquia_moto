@@ -12,6 +12,10 @@
                 <input  required ="text" class="form-control" id="loja" name="loja" placeholder="Digite o nome da loja">
             </div>
             <div class="col-md-6 col-md">
+                <label for="name" class="form-label">CEP:</label>
+                <input  required type="text" class="form-control" id="cep" name="cep" placeholder="Digite seu cep">
+            </div>
+            <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Estado:</label>
                 <input required type="text" class="form-control" id="estado" name="estado" placeholder="Digite o estado">
             </div>
@@ -21,7 +25,15 @@
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Bairro:</label>
-                <input required type="text" class="form-control" id="Bairro" name="bairro" placeholder="Digite o bairro">
+                <input required type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro">
+            </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">Rua:</label>
+                <input  required type="text" class="form-control" id="rua" name="rua" placeholder="Digite a sua rua">
+            </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">Complemento:</label>
+                <input type="text" class="form-control" id="complemento" name="complemento">
             </div>
         </div>
         <div>
@@ -31,5 +43,10 @@
     </form>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#cep').mask('00000-000');
+    });
+</script>
 <script src="https://kit.fontawesome.com/02f2b4886a.js" crossorigin="anonymous"></script>
 @endsection
