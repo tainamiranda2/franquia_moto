@@ -3,12 +3,12 @@
 
  ## php na versão 7.2 e seu framework na versão 5.8, wampp 2.3 e mysql 5.2 configurações necessárias para rodar o projeto no seu localhost
  ## páginas do sistema:
- ### login - [X]
- ### cadastro de fornecedores 
- ### cadastro de produtos
- ### cadastro de lojas
+ ### login 
+ ### cadastro de fornecedores - [X]
+ ### cadastro de produtos - [X]
+ ### cadastro de lojas - [X]
  ### cadastro de compras
- ### cadastro de vendas 
+ ### cadastro de vendas - [X]
  ### cadastro de clientes
   ### cadastro de funcionários
  ### cadastro de funções
