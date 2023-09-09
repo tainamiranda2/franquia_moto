@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class ClientesController extends Controller
+use App\Models\Cliente;
+class ClienteController extends Controller
 {
     public function index(){
+        //$Clientes=Cliente::All();
+        
         return view('cliente');
     }
 }

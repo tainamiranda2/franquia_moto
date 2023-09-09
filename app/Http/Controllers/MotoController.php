@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LojasController extends Controller
+class MotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class LojasController extends Controller
      */
     public function index()
     {
-        return view('loja');
+        return view('moto');
     }
 
     /**
@@ -21,9 +21,9 @@ class LojasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request  $request)
+    public function create()
     {
-        dd($request->all());
+        //
     }
 
     /**

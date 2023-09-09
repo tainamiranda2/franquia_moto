@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMotosTable extends Migration
+class CreateFornecedorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateMotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('motos', function (Blueprint $table) {
+        Schema::create('fornecedor', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nome', 50);
+            $table->string('email', 50);
+            $table->string('cpf_cnpj', 50);
+            $table->string('cep', 30);
+
+            $table->string('telefone', 30);
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateMotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('motos');
+        Schema::dropIfExists('fornecedor');
     }
 }

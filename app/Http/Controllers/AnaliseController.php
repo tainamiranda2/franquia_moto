@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MotosController extends Controller
+use App\Models\Cliente;
+
+class AnalisesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,10 @@ class MotosController extends Controller
      */
     public function index()
     {
-        return view('moto');
+
+       // $Clientes=Cliente::All();
+
+        //return view('analise');
     }
 
     /**
