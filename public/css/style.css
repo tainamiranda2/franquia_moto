@@ -207,6 +207,10 @@ form{
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
 }
 
+.card-geral{
+display: inline;
+background: #990e0e;
+}
 @media (max-width: 768px) {
     .menu {
         padding: 10px;

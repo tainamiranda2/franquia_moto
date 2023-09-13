@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Cliente;
+use App\Venda;
 
-class AnalisesController extends Controller
+class AnaliseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,10 @@ class AnalisesController extends Controller
     public function index()
     {
 
-       // $Clientes=Cliente::All();
+       $venda=Venda::All();
 
-        //return view('analise');
+        return view('analise',['venda' =>  $venda] );
+     //  return view('analise');
     }
 
     /**

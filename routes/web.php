@@ -29,21 +29,21 @@ Route::get('/','LoginController@index');
 
 
 //loja
-Route::get('/loja', 'LojasController@index')->name('loja');
-Route::post('/loja', 'LojasController@create')->name('adicionarLoja');
+Route::get('/loja', 'LojaController@index')->name('loja');
+Route::post('/loja', 'LojaController@create')->name('adicionarLoja');
 
 //cliente
-Route::get('/cliente', 'ClientesController@index')->name('cliente');
+Route::get('/cliente', 'ClienteController@index')->name('cliente');
 
 //fornecedor
-Route::get('/fornecedor', 'FornecedoresController@index')->name('fornecedor');
+Route::get('/fornecedor', 'FornecedorController@index')->name('fornecedor');
 
 //analise
-Route::get('/analise', 'AnalisesController@index')->name('analise');
+Route::get('/analise', 'AnaliseController@index')->name('analise');
 
 //moto
-Route::get('/moto', 'MotosController@index')->name('moto');
+Route::get('/moto', 'MotoController@index')->name('moto');
 
 //venda
-Route::get('/venda', 'VendasController@index')->name('venda');
+Route::get('/venda', 'VendaController@index')->name('venda');
 
