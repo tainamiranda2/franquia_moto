@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Moto;
 class MotoController extends Controller
 {
     /**
@@ -21,11 +21,18 @@ class MotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request  $request){
+        $moto=new Moto;
+        $moto->nome=$request->nome;
+        $moto->ano=$request->ano;
+        $moto->marca=$request->marca;
+        $moto->modelo=$request->modelo;
+        $moto->preco=$request->preco;       
+        $moto->loja_id=1;
+        $moto->forncedor_id=1;   
+    $moto->save();
+    return redirect('/analise');
     }
-
     /**
      * Store a newly created resource in storage.
      *

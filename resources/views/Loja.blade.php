@@ -9,7 +9,7 @@
         <div class="dados">
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Nome:</label>
-                <input  required ="text" class="form-control" id="loja" name="loja" placeholder="Digite o nome da loja">
+                <input  required ="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da loja">
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">CEP:</label>

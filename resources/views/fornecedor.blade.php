@@ -3,13 +3,13 @@
 @section('content')
 
 <div class="conteudo">
-    <form action="{{}}" method="POST" >
+    <form action="{{Route("adicionarFornecedor")}}" method="POST" >
         @csrf
         <h1>Fornecedor</h1>
         <div class="dados">
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Nome:</label>
-                <input  required ="text" class="form-control" id="fornecedor" name="fornecedor" placeholder="Digite o nome">
+                <input  required ="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Email:</label>

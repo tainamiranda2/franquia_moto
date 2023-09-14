@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Loja;
 class LojaController extends Controller
 {
     /**
@@ -23,7 +23,18 @@ class LojaController extends Controller
      */
     public function create(Request  $request)
     {
-        dd($request->all());
+        $loja=new Loja;
+            $loja->nome=$request->nome;
+            $loja->estado=$request->estado;
+            $loja->cidade=$request->cidade;
+            $loja->bairro=$request->bairro;
+            $loja->cep=$request->cep;
+            $loja->complemento=$request->complemento;
+            $loja->rua=$request->rua;
+            $loja->funcionario_id='1';
+
+        $loja->save();
+        return redirect('/analise');
     }
 
     /**
