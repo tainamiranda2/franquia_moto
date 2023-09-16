@@ -31,12 +31,24 @@
 
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Loja:</label>
-                <input required type="text" class="form-control" id="loja_id" name="loja_id" placeholder="Digite a loja">
+                <select name="loja_id" id="loja_id">
+                <option value="">Selecione uma loja</option>
+                @foreach ($lojas as $loja)
+                    <option value="{{ $loja->id }}">{{ $loja->nome }}</option>
+                @endforeach
+            </select>
             </div>
+
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Fornecedor:</label>
-                <input required type="text" class="form-control" id="fornecedor_id" name="fornecedor_id" placeholder="Digite a fornecedor">
+                <select name="forncedor_id" id="forncedor_id">
+                <option value="">Selecione um fornecedor</option>
+                @foreach ($fornecedores as $forncedor)
+                    <option value="{{ $forncedor->id }}">{{ $forncedor->nome }}</option>
+                @endforeach
+            </select>
             </div>
+
         </div>
         <div>
             <button type="submit" class="btn btn-save">Salvar</button>

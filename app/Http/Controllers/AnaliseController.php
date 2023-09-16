@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Venda;
-
+use App\Loja;
+use App\Moto;
 class AnaliseController extends Controller
 {
     /**
@@ -16,9 +17,17 @@ class AnaliseController extends Controller
     public function index()
     {
 
-       $venda=Venda::All();
+        $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
+        ->join('loja', 'venda.loja_id', '=', 'loja.id')
+        ->groupBy('loja.nome')
+        ->orderBy('loja.nome')
+        ->get();
 
-        return view('analise',['venda' =>  $venda] );
+        
+    $lojas = Loja::all();
+    $motos = Moto::all();
+
+    return view('analise', compact('vendasPorLoja', 'motos', 'lojas'));
      //  return view('analise');
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Moto;
+use App\Loja;
+use App\Fornecedor;
 class MotoController extends Controller
 {
     /**
@@ -13,7 +15,10 @@ class MotoController extends Controller
      */
     public function index()
     {
-        return view('moto');
+        $lojas = Loja::all();
+        $fornecedores = Fornecedor::all();
+
+        return view('moto', compact( 'fornecedores', 'lojas'));
     }
 
     /**
@@ -28,8 +33,9 @@ class MotoController extends Controller
         $moto->marca=$request->marca;
         $moto->modelo=$request->modelo;
         $moto->preco=$request->preco;       
-        $moto->loja_id=1;
-        $moto->forncedor_id=1;   
+        $moto->loja_id=$request->loja_id;
+        //esta escrito assim no banco
+        $moto->forncedor_id=$request->forncedor_id;   
     $moto->save();
     return redirect('/analise');
     }

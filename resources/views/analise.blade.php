@@ -2,52 +2,34 @@
 @section('titulo', 'Mdados')
 @section('content')
 
-<div class="conteudo">
+<div class="conteudo" style="margin: 5px;">
 
   <!-- <div style="padding: 20px;margin: 6vh; margin-right: 25vh; border-radius: 10px;display:flex; flex-direction:column; justify-content: center; align-items: center;">
         <i class="fa-solid fa-chart-pie" style="color: #929190;"></i>
         <h1 style="color: rgb(146, 145, 144);" >Não temos análises no momento!!</h1>
     </div>
+
+
 --> 
-@foreach($venda as $teste)
-
-<p>{{$teste->valor_total}}</p>
+    <div style="display:flex; padding:30px; ">
+    <h1>Útlimos 4 lojas com vendas </h1>
+    @foreach ($vendasPorLoja as $vendaPorLoja)
+    <div class="card" style='margin:5px; padding: 5px;  width:200px; margin-bottom: 5px;'>
+        <h1>{{ $vendaPorLoja->nome_loja }}</h1>
+        <div>R$ {{ $vendaPorLoja->valor_total }}</div>
+        <div id="chart_div{{ $vendaPorLoja->id }}" style="width: 300; height: 50px;"></div>
+    </div>
 @endforeach
-    <div style="display:flex; padding:30px;">
-<div class="card" style='margin:5px; padding: 10px;  width:200px;'>
-        <h1>Pedro Oliveira</h1>
-        <div>R$ {}</div>
-        <div id="chart_div" style="width: 100%; height: 50px;"></div>
-
-</div>
-<div class="card"  style='margin:5px; padding: 10px;  width:200px;'>
-        <h1>Pedro Oliveira</h1>
-        <div>R$ {}</div>
-        <div id="chart_div2" style="width: 100%; height: 50px;"></div>
-
-</div> 
-<div class="card"  style='margin:5px; padding: 10px; width:200px;' >
-        <h1>Pedro Oliveira</h1>
-        <div>R$ {}</div>
-        <div id="chart_div3" style="width: 100%; height: 50px;"></div>
-
-</div>
-<div class="card"  style='margin:5px; padding: 10px;  width:200px;'>
-        <h1>Pedro Oliveira</h1>
-        <div>R$ {}</div>
-        <div id="chart_div4" style="width: 100%; height: 50px;"></div>
-
-</div>
 
 </div>
 
 
 
-    <div class="grafico-combinado"  style='margin:5px'>
-    <div id="chat_combinacao" style="width: 500px; height: 200px;"></div>
+    <div class="grafico-combinado"  style="margin:10px;">
+    <div id="chat_combinacao" style="width: 100%; height: 200px;"></div>
     </div>
 
-    <div class="juntar" style="display: flex;">
+    <div class="juntar" style="display: flex; ">
     <div class="grafico-linha">
     <div id="curve_chart" style="width: 500px; height: 200px"></div>
     </div>
@@ -63,66 +45,49 @@
 <script src="../js/roda.js"></script> 
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--grafico 1-->
 
-<script>
-google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-     
-      ['Exercise', 2],
-    ]);
-
-    var options = {
-      title: 'My Daily Activities',
-      pieHole: 0.4,
-      colors: ['#e53935', '#929190']
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-
-    var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
-    chart2.draw(data, options);
-
-    var chart3 = new google.visualization.PieChart(document.getElementById('chart_div3'));
-    chart3.draw(data, options);
-
-    var chart4 = new google.visualization.PieChart(document.getElementById('chart_div4'));
-    chart4.draw(data, options);
-  }
-
-  document.addEventListener('DOMContentLoaded', carregarGrafico);
-</script>
 <!--grafico 2-->
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
+        google.charts.setOnLoadCallback(drawChart);
 
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador'],
-          ['2004/05',  165,      938,         ],
-          ['2005/06',  135,      1120,        ],
-       
-        ]);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Categoria', 'Cor 1', 'Cor 2'],
+                ['Jan', 20, 30],
+                ['Fev', 40, 10],
+                ['Mar', 10, 50],
+                ['Abril', 10, 50],
+                ['Maio', 30, 20],
+                ['Jun', 30, 20],
+                ['Jul', 30, 20],
+                ['Ago', 30, 20],
+                ['Set ', 30, 20],
+                ['Out ', 10, 50],
+                ['Nov ', 10, 50],
+                ['Dez ', 10, 50],
 
-        var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}},
-          colors: ['#e53935', '#929190']
-        };
+            ]);
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chat_combinacao'));
-        chart.draw(data, options);
-      }
+            var options = {
+                title: 'Gráfico de Colunas Empilhadas com Duas Cores',
+               
+                isStacked: true, // Empilhar as colunas
+                colors: ['#e53935', '#929190'], // Definir cores para cada série
+                hAxis: {
+                    title: 'Categorias'
+                },
+                vAxis: {
+                    title: 'Valores'
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chat_combinacao'));
+
+            chart.draw(data, options);
+        }
     </script>
 
     <!--grafico 3-->
@@ -132,15 +97,23 @@ google.charts.load('current', {'packages':['corechart']});
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
+          ['Mes', 'Vendas', 'Produtos'],
+                ['Fev', 40, 10],
+                ['Mar', 10, 50],
+                ['Abril', 10, 50],
+                ['Maio', 30, 20],
+                ['Jun', 30, 20],
+                ['Jul', 30, 20],
+                ['Ago', 30, 20],
+                ['Set ', 30, 20],
+                ['Out ', 10, 50],
+                ['Nov ', 10, 50],
+                ['Dez ', 10, 50],
+
         ]);
 
         var options = {
-          title: 'Company Performance',
+          title: 'Vendas - ',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
