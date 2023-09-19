@@ -19,13 +19,10 @@ class AnaliseController extends Controller
         $mesAtual = date('m');
         $anoAtual = date('Y');
 
-        $regioes = [
-            'Norte' => ['Acre', 'Amapá', 'Amazonas', 'Pará', 'Rondônia', 'Roraima', 'Tocantins'],
-            'Nordeste' => ['Alagoas', 'Bahia', 'Ceará', 'Maranhão', 'Paraíba', 'Pernambuco', 'Piauí', 'Rio Grande do Norte', 'Sergipe'],
-            'Sudeste' => ['Espírito Santo', 'Minas Gerais', 'Rio de Janeiro', 'São Paulo'],
-            'Sul' => ['Paraná', 'Rio Grande do Sul', 'Santa Catarina'],
-            'Centro-Oeste' => ['Distrito Federal', 'Goiás', 'Mato Grosso', 'Mato Grosso do Sul'],
+        $meses = [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
         ];
+        
 
         $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
         ->join('loja', 'venda.loja_id', '=', 'loja.id')
@@ -55,28 +52,34 @@ class AnaliseController extends Controller
     $vendasPorLojaJSON = json_encode($vendasPorLoja);
     $vendasPorDiaJSON = json_encode($vendasPorDia);
 
-    $regiaoComMaisVendas = '';
-$vendasMaisAltas = 0;
+    $resultadosPorMes = DB::select("
+        SELECT
+            DATE_FORMAT(created_at, '%M') AS mes,
+            MAX(valor_total) AS max,
+            MIN(valor_total) AS min
+        FROM
+            venda
+        WHERE
+            YEAR(created_at) = ?
+        GROUP BY
+            mes
+        ORDER BY
+            mes
+    ", [$anoAtual]);
 
-foreach ($regioes as $regiao => $estados) {
-    $vendasPorRegiao = 0;
 
-    foreach ($estados as $estado) {
-        foreach ($vendasPorLoja as $vendaLoja) {
-            if (stripos($vendaLoja->nome_loja, $estado) !== false &&
-                date('m', strtotime($vendaLoja->created_at)) == $mesAtual &&
-                date('Y', strtotime($vendaLoja->created_at)) == $anoAtual) {
-                $vendasPorRegiao += $vendaLoja->valor_total;
-            }
-        }
-    }
 
-    if ($vendasPorRegiao > $vendasMaisAltas) {
-        $vendasMaisAltas = $vendasPorRegiao;
-        $regiaoComMaisVendas = $regiao;
-    }
-}
-    return view('analise', compact( 'vendasPorLojaJSON', 'vendasPorDiaJSON', 'lojaMaisVendida', 'regiaoComMaisVendas','vendasPorLoja', 'vendasPorDia', 'motos', 'lojas'));
+    return view('analise', compact( 
+        'vendasPorLojaJSON', 
+        'vendasPorMes',
+        'resultadosPorMes',
+    'vendasPorDiaJSON', 
+    'lojaMaisVendida', 
+    'regiaoComMaisVendas',
+    'vendasPorLoja', 
+    'vendasPorDia',
+     'motos',
+     'lojas'));
      //  return view('analise');
     }
 

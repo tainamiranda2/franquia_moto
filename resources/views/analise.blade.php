@@ -37,7 +37,7 @@
 
     <div class="card-produto" style="background: #fff; margin:10px; border-radius: 10px; width:400px">
     <h1>Produtos</h1>
-      <p>Entrada {}</p>
+      <p>Produtos {}</p>
       <p>Saída {}</p>
     </div>
 
@@ -90,16 +90,21 @@
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Mes', 'Vendas', 'Produtos'],
-                ['Fev', 40, 10],
-               
-
+         /*  ['Mes', 'Maior venda no mes', 'Menor venda no mes'],
+                ['Fev', 40, 50],
+                ['Mac', 50, 80],
+                ['Abril', 30, 90],
+               */
+              ['Mês', 'Maior venda no mês', 'Menor venda no mês'],
+            @foreach ($resultadosPorMes as $resultado)
+                ['{{ $resultado->mes }}', {{ $resultado->max ?? 0 }}, {{ $resultado->min ?? 0 }}],
+            @endforeach
         ]);
 
         var options = {
-          title: 'Vendas - ',
+          title: 'Vendas por Mês',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
