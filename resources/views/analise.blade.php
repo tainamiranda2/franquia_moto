@@ -12,7 +12,7 @@
 
 --> 
     <div style="display:flex; padding:30px; ">
-    <h1>Útlimos 4 lojas com vendas </h1>
+ 
     @foreach ($vendasPorLoja as $vendaPorLoja)
     <div class="card" style='margin:5px; padding: 5px;  width:200px; margin-bottom: 5px;'>
         <h1>{{ $vendaPorLoja->nome_loja }}</h1>
@@ -26,6 +26,7 @@
 
 
     <div class="grafico-combinado"  style="margin:10px;">
+
     <div id="chat_combinacao" style="width: 100%; height: 200px;"></div>
     </div>
 
@@ -50,37 +51,31 @@
 
 <!--grafico 2-->
 <script type="text/javascript">
+   //var vendasPorLoja = JSON.parse('{!! $vendasPorLojaJSON !!}');
+   //var vendasPorDia = JSON.parse('{!! $vendasPorDiaJSON !!}');
       google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Categoria', 'Cor 1', 'Cor 2'],
-                ['Jan', 20, 30],
-                ['Fev', 40, 10],
-                ['Mar', 10, 50],
-                ['Abril', 10, 50],
-                ['Maio', 30, 20],
-                ['Jun', 30, 20],
-                ['Jul', 30, 20],
-                ['Ago', 30, 20],
-                ['Set ', 30, 20],
-                ['Out ', 10, 50],
-                ['Nov ', 10, 50],
-                ['Dez ', 10, 50],
+              ['Dia', 'Quantidade de Vendas'],
+
+            @foreach($vendasPorDia as $vendaDia)
+                ['{{ $vendaDia->data }}', {{ $vendaDia->quantidade_vendas }}],
+            @endforeach
 
             ]);
 
             var options = {
-                title: 'Gráfico de Colunas Empilhadas com Duas Cores',
+                title: 'Loja - {{ $lojaMaisVendida->nome_loja }}',
                
                 isStacked: true, // Empilhar as colunas
                 colors: ['#e53935', '#929190'], // Definir cores para cada série
                 hAxis: {
-                    title: 'Categorias'
+                    title: 'Dia'
                 },
                 vAxis: {
-                    title: 'Valores'
+                    title: 'Quantidade de Vendas'
                 }
             };
 
@@ -99,16 +94,7 @@
         var data = google.visualization.arrayToDataTable([
           ['Mes', 'Vendas', 'Produtos'],
                 ['Fev', 40, 10],
-                ['Mar', 10, 50],
-                ['Abril', 10, 50],
-                ['Maio', 30, 20],
-                ['Jun', 30, 20],
-                ['Jul', 30, 20],
-                ['Ago', 30, 20],
-                ['Set ', 30, 20],
-                ['Out ', 10, 50],
-                ['Nov ', 10, 50],
-                ['Dez ', 10, 50],
+               
 
         ]);
 
