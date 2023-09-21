@@ -24,7 +24,7 @@ class AnaliseController extends Controller
         ];
         
 
-        $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
+      /*  $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
         ->join('loja', 'venda.loja_id', '=', 'loja.id')
         //->whereMonth('venda.created_at', '=', $mesAtual)
         //->whereYear('venda.created_at', '=', $anoAtual)
@@ -33,7 +33,17 @@ class AnaliseController extends Controller
         ->orderBy('loja.nome')
 
         ->orderByDesc('valor_total')
+        ->take(4)
         ->get();
+*/
+$vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
+    ->join('loja', 'venda.loja_id', '=', 'loja.id')
+    //->whereMonth('venda.created_at', '=', $mesAtual)
+    //->whereYear('venda.created_at', '=', $anoAtual)
+    ->groupBy('loja.nome')
+    ->orderByDesc('valor_total') // Ordena em ordem decrescente pelo valor total
+    ->take(4) // Limita os resultados às 4 lojas com maiores vendas
+    ->get();
 
         $lojaMaisVendida = $vendasPorLoja->first();
 
@@ -67,7 +77,16 @@ class AnaliseController extends Controller
             mes
     ", [$anoAtual]);
 
+    $motosVendas = DB::table('venda')->count();
 
+    $motos = DB::table('moto')->count();
+
+    $dadosParaGraficoPizza = [];
+foreach ($vendasPorLoja as $vendaPorLoja) {
+    $dadosParaGraficoPizza[$vendaPorLoja->nome_loja] = $vendaPorLoja->valor_total;
+}
+
+$dadosParaGraficoPizzaJSON = json_encode($dadosParaGraficoPizza);
 
     return view('analise', compact( 
         'vendasPorLojaJSON', 
@@ -79,6 +98,8 @@ class AnaliseController extends Controller
     'vendasPorLoja', 
     'vendasPorDia',
      'motos',
+     'motosVendas',
+     'dadosParaGraficoPizzaJSON',
      'lojas'));
      //  return view('analise');
     }

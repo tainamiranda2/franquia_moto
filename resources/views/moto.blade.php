@@ -1,6 +1,8 @@
 @extends('layouts.main')
 @section('titulo', 'Mdados')
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 
 <div class="conteudo">
     <form action="{{Route("adicionarMoto")}}" method="POST" >
@@ -31,24 +33,23 @@
 
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Loja:</label>
-                <select name="loja_id" id="loja_id">
-                <option value="">Selecione uma loja</option>
-                @foreach ($lojas as $loja)
-                    <option value="{{ $loja->id }}">{{ $loja->nome }}</option>
-                @endforeach
-            </select>
+                <select class="form-control js-example-basic-single" name="loja_id" id="loja_id">
+                    <option value="">Selecione uma loja</option>
+                    @foreach ($lojas as $loja)
+                        <option value="{{ $loja->id }}">{{ $loja->nome }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Fornecedor:</label>
-                <select name="forncedor_id" id="forncedor_id">
-                <option value="">Selecione um fornecedor</option>
-                @foreach ($fornecedores as $forncedor)
-                    <option value="{{ $forncedor->id }}">{{ $forncedor->nome }}</option>
-                @endforeach
-            </select>
+                <select class="form-control" name="forncedor_id" id="forncedor_id">
+                    <option value="">Selecione um fornecedor</option>
+                    @foreach ($fornecedores as $forncedor)
+                        <option value="{{ $forncedor->id }}">{{ $forncedor->nome }}</option>
+                    @endforeach
+                </select>
             </div>
-
         </div>
         <div>
             <button type="submit" class="btn btn-save">Salvar</button>
@@ -56,6 +57,11 @@
         </div>
     </form>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+</script>
 
 <script src="https://kit.fontawesome.com/02f2b4886a.js" crossorigin="anonymous"></script>
 @endsection
