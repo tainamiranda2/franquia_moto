@@ -2,6 +2,7 @@
 @section('titulo', 'Mdados')
 @section('content')
 
+@include('layouts.sidebar')
 <div class="conteudo">
     <form action="{{Route("adicionarCliente")}}" method="POST" >
         @csrf

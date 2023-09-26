@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 
 <div class="conteudo">
+    @include('layouts.sidebar')
     <form action="{{Route("adicionarMoto")}}" method="POST" >
         @csrf
         <h1>Moto</h1>
@@ -29,8 +30,6 @@
                 <label for="name" class="form-label">Preço:</label>
                 <input required type="number" class="form-control" id="preco" name="preco" placeholder="Digite a preço">
             </div>
-           
-
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Loja:</label>
                 <select class="form-control js-example-basic-single" name="loja_id" id="loja_id">

@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="conteudo">
+    @include('layouts.sidebar')
     <form action="{{Route("adicionarLoja")}}" method="POST" >
         @csrf
         <h1>Loja</h1>

@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 
 <div class="conteudo">
+    @include('layouts.sidebar')
     <form action="{{Route("adicionarVenda")}}" method="POST" >
         @csrf
         <h1>Venda</h1>
