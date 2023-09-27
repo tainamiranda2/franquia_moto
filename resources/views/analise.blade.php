@@ -2,7 +2,7 @@
 @section('titulo', 'Mdados')
 @section('content')
 
-<div class="conteudo" style="margin: 5px;">
+<div class="form-container" style="margin: 5px;">
 
   <!-- <div style="padding: 20px;margin: 6vh; margin-right: 25vh; border-radius: 10px;display:flex; flex-direction:column; justify-content: center; align-items: center;">
         <i class="fa-solid fa-chart-pie" style="color: #929190;"></i>

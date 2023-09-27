@@ -4,12 +4,12 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 
-<div class="conteudo">
+<div class="form-container">
     @include('layouts.sidebar')
     <form action="{{Route("adicionarMoto")}}" method="POST" >
         @csrf
-        <h1>Moto</h1>
-        <div class="dados">
+        <div class="titulo-form">Moto</div>
+        <div class="row g-3">
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Nome:</label>
                 <input  required ="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da moto">
@@ -50,7 +50,7 @@
                 </select>
             </div>
         </div>
-        <div>
+        <div class="col-12">
             <button type="submit" class="btn btn-save">Salvar</button>
             <button type="button" class="btn btn-cancel">Cancelar</button>
         </div>

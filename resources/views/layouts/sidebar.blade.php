@@ -2,13 +2,12 @@
     <div class="menu_content">
       <ul class="menu_items">
         <div class="menu_title menu_menu"></div>
-       
         <li class="item">
           <a href="/analise" class="nav_link">
             <span class="navlink_icon">
               <i class="fa-solid fa-chart-line"></i>
             </span>
-            <span class="navlink">ANÁLISES</span>
+            <span class="navlink">Análises</span>
           </a>
         </li>
         <li class="item">
@@ -16,33 +15,50 @@
             <span class="navlink_icon">
               <i class="fa-solid fa-shop"></i>
             </span>
-            <span class="navlink">LOJA</span>
+            <span class="navlink">Loja</span>
           </a>
         </li>
         <li class="item">
-          <a href="#" class="nav_link">
+          <a href="/cliente" class="nav_link">
             <span class="navlink_icon">
-              <i class="bx bx-filter"></i>
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <span class="navlink">Cliente</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/moto" class="nav_link">
+            <span class="navlink_icon">
+              <i class="fa-solid fa-motorcycle"></i>
+            </span>
+            <span class="navlink">Moto</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/venda" class="nav_link">
+            <span class="navlink_icon">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </span>
+            <span class="navlink">Venda</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/fornecedor" class="nav_link">
+            <span class="navlink_icon">
+              <i class="fa-solid fa-users"></i>
             </span>
             <span class="navlink">Fornecedor</span>
           </a>
         </li>
         <li class="item">
-          <a href="#" class="nav_link">
+          <a href="/" class="nav_link">
             <span class="navlink_icon">
-              <i class="bx bx-cloud-upload"></i>
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </span>
-            <span class="navlink">CLIENTE</span>
+            <span class="navlink">Sair</span>
           </a>
         </li>
-        <li class="item">
-          <a href="#" class="nav_link">
-            <span class="navlink_icon">
-              <i class="bx bx-cloud-upload"></i>
-            </span>
-            <span class="navlink">CLIENTE</span>
-          </a>
-        </li>
+        
       </ul>
       <div class="bottom_content">
         <div class="bottom expand_sidebar">
@@ -71,32 +87,31 @@
             </a>
         </div>
         <div class="item" id="btnCliente">
-            <a href="/cliente">
-            <i class="fa-solid fa-user"></i>
+            <a >
+            
             Clientes
             </a>
         </div>
         <div class="item" id="btnMoto">
-            <a href="/moto">
-            <i class="fa-solid fa-motorcycle"></i>
+            <a >
+            
             Motos
             </a>
         </div>
         <div class="item" id="btnVenda">
-            <a href="/venda">
-            <i class="fa-solid fa-bag-shopping"></i>
+            <a >
+            
             Vendas
             </a>
         </div>
         <div class="item" id="btnFornecedor">
-            <a href="/fornecedor">
-            <i class="fa-solid fa-users"></i>
+            <a >
+           
             Fornecedores
             </a>
         </div>
         <div class="item" id="btnSair">
             <a href="/">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
             Sair
             </a>
         </div>

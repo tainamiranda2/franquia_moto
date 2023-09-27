@@ -9,6 +9,7 @@
 }
 :root {
   --white-color: #fff;
+  --red-color: #DB1313;
   --blue-color: #4070f4;
   --grey-color: #707070;
   --grey-color-light: #aaa;
@@ -22,7 +23,7 @@ body.dark {
 }
 body.dark {
   --white-color: #333;
-  --blue-color: #fff;
+  --red-color: #fff;
   --grey-color: #f2f2f2;
   --grey-color-light: #aaa;
 }
@@ -44,9 +45,9 @@ body.dark {
   display: flex;
   align-items: center;
   column-gap: 10px;
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--blue-color);
+  font-size: 25px;
+  font-weight: 550;
+  color: var(--red-color) ;
 }
 .navbar img {
   width: 35px;
@@ -240,22 +241,29 @@ body.dark {
   display: none;
 }
 
-
 .form-container {
-  margin: 100px calc(18% + 30px);
+  position: relative;
+  margin-top: 100px;
+  left: calc(18% + 30px);
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
   max-width: 950px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-.dados{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 5px;
+  transition: all 0.5s ease;
 }
 
+.sidebar.close ~ .form-container{
+  left: calc(80px + 30px);
+ }
+ 
+.titulo-form{
+  font-family: Manrope;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 .form-container.dark{
   background-color: #333;
   color: #fff !important;

@@ -3,11 +3,11 @@
 @section('content')
 
 @include('layouts.sidebar')
-<div class="conteudo">
+<div class="form-container">
     <form action="{{Route("adicionarCliente")}}" method="POST" >
         @csrf
-        <h1>Cliente </h1>
-        <div class="dados">
+        <div class="titulo-form">Cliente</div>
+        <div class="row g-3">
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Nome:</label>
                 <input  required ="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
@@ -25,7 +25,7 @@
                 <input required type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone">
             </div>
         </div>
-        <div>
+        <div class="col-12">
             <button type="submit" class="btn btn-save">Salvar</button>
             <button type="button" class="btn btn-cancel">Cancelar</button>
         </div>
