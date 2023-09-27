@@ -2,14 +2,15 @@
 @section('titulo', 'Mdados')
 @section('content')
 
-<div class="conteudo">
+<div class="form-container">
+    @include('layouts.sidebar')
     <form action="{{Route("adicionarLoja")}}" method="POST" >
         @csrf
-        <h1>Loja</h1>
-        <div class="dados">
+        <div class="titulo-form">Loja</div>
+        <div class="row g-3">
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">Nome:</label>
-                <input  required ="text" class="form-control" id="loja" name="loja" placeholder="Digite o nome da loja">
+                <input  required ="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da loja">
             </div>
             <div class="col-md-6 col-md">
                 <label for="name" class="form-label">CEP:</label>
@@ -36,7 +37,7 @@
                 <input type="text" class="form-control" id="complemento" name="complemento" placeholder="opcional">
             </div>
         </div>
-        <div>
+        <div class="col-12">
             <button type="submit" class="btn btn-save">Salvar</button>
             <button type="button" class="btn btn-cancel">Cancelar</button>
         </div>

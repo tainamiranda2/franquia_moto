@@ -23,12 +23,7 @@
 </head>
 <body>
 <div>
-<header>
-    <nav class="navbar">
-        <a href="/" class="logo">Mdados</a>
-    </nav>
-</header>
-    
+@include('layouts.navbar') 
 <div class="container" id="landing">
     <img src="..\img\Camada_x0020_1.png" alt="" class="img_home">
     <div class="info">
