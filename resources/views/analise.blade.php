@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('titulo', 'Mdados')
 @section('content')
+@include('layouts.sidebar')
 
 <div class="form-container" style="margin: 5px;">
 
