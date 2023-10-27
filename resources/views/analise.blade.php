@@ -12,22 +12,31 @@
 
 
 --> 
+<!--grafico 1-->
+
     <div style="display:flex; padding:30px; ">
- 
     @foreach ($vendasPorLoja as $vendaPorLoja)
-    <div class="card" style='margin:5px;  width:250px;  border-radius: 10px;'>
+    <div class="card" style='margin:5px;  width:250px; margin-top:25px; border-radius: 10px;'>
         <p style=" color: #929190;">{{ $vendaPorLoja->nome_loja }}</p>
         <h1>R$ {{ $vendaPorLoja->valor_total }}</h1>
-        <div id="piechart" style="width:200px;  height: 100px;"></div>
+        <div id="piechart" style="width:200px;  height: 50px;"></div>
 
     </div>
 @endforeach
 
 </div>
-
+<!--grafico 2-->
 
     <div class="grafico-combinado"  style="margin:5px;">
-
+<div class="filtro">
+    <label for="opcaoFiltro">Filtrar por:</label>
+    <select id="opcaoFiltro">
+        <option value="lojas">Lojas</option>
+        <option value="moto">Moto</option>
+        <option value="funcionario">Funcionário</option>
+    </select>
+    <button onclick="filtrar()">Filtrar</button>
+</div>
     <div id="chat_combinacao" style="width: 100%; height: 200px;"></div>
     </div>
 
@@ -35,7 +44,7 @@
     <div class="grafico-linha">
     <div id="curve_chart" style="width: 500px; height: 200px"></div>
     </div>
-
+<!--grafico 3-->
     <div class="card-produto" style="background: #fff; margin:10px; border-radius: 10px; width:400px">
     <h1 style="color: #929190;">Estoque geral das lojas</h1>
       <p>Produtos - {{$motos}}</p>
@@ -49,7 +58,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--grafico 1-->
 
-@foreach ($vendasPorLoja as $vendaPorLoja)
+<!--@foreach ($vendasPorLoja as $vendaPorLoja)
 <script type="text/javascript">
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
@@ -74,7 +83,7 @@ console.log(dadosParaGraficoPizza)
     }
 </script>
 @endforeach
-
+-->
 <!--grafico 2-->
 <script type="text/javascript">
    //var vendasPorLoja = JSON.parse('{!! $vendasPorLojaJSON !!}');
@@ -84,13 +93,12 @@ console.log(dadosParaGraficoPizza)
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-              ['Dia', 'Quantidade de Vendas'],
+            ['Categoria', 'Quantidade Vendida'],
 
-            @foreach($vendasPorDia as $vendaDia)
-                ['{{ $vendaDia->data }}', {{ $vendaDia->quantidade_vendas }}],
+            @foreach($dadosParaGrafico as $dados)
+                ['{{ $dados->categoria }}', {{ $dados->quantidade_vendida }}],
             @endforeach
-
-            ]);
+        ]);
 
             var options = {
                 title: 'Loja - {{ $lojaMaisVendida->nome_loja }}',
@@ -108,7 +116,17 @@ console.log(dadosParaGraficoPizza)
             var chart = new google.visualization.ColumnChart(document.getElementById('chat_combinacao'));
 
             chart.draw(data, options);
+            
         }
+
+        function filtrar() {
+        // Obtenha o valor selecionado no seletor
+        var opcaoSelecionada = document.getElementById("opcaoFiltro").value;
+
+        // Atualize os gráficos com base na opção selecionada
+        // Adicione lógica aqui para chamar as funções ou APIs necessárias para atualizar os gráficos
+        console.log("Filtrar por: " + opcaoSelecionada);
+    }
     </script>
 
     <!--grafico 3-->

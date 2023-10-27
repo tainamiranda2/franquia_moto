@@ -14,7 +14,7 @@ class AnaliseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $mesAtual = date('m');
         $anoAtual = date('Y');
@@ -87,8 +87,28 @@ foreach ($vendasPorLoja as $vendaPorLoja) {
 }
 
 $dadosParaGraficoPizzaJSON = json_encode($dadosParaGraficoPizza);
+//grafico dois
+
+$filtro = $request->input('filtro');
+$dadosParaGrafico = []; 
+
+
+if ($filtro == 'mota') {
+    // Consulta para obter as informações relacionadas a motas
+    $dadosParaGrafico = $this->getDadosPorMota();
+} elseif ($filtro == 'funcionario') {
+    // Consulta para obter as informações relacionadas a funcionários
+    $dadosParaGrafico = $this->getDadosPorFuncionario();
+} elseif ($filtro == 'estado') {
+    // Consulta para obter as informações relacionadas a estados
+    $dadosParaGrafico = $this->getDadosPorEstado();
+}
+
+$dadosParaGraficoJSON = json_encode($dadosParaGrafico);
+
 
     return view('analise', compact( 
+       'dadosParaGraficoJSON',
         'vendasPorLojaJSON', 
         'vendasPorMes',
         'resultadosPorMes',
@@ -169,4 +189,38 @@ $dadosParaGraficoPizzaJSON = json_encode($dadosParaGraficoPizza);
     {
         //
     }
+
+    public function getDadosPorMota()
+{
+    return DB::table('venda_mota')
+        ->join('mota', 'venda_mota.mota_id', '=', 'mota.id')
+        ->select('mota.nome as categoria', DB::raw('COUNT(*) as quantidade_vendida'))
+        ->groupBy('categoria')
+        ->orderByDesc('quantidade_vendida')
+        ->take(4)
+        ->get();
+}
+
+public function getDadosPorFuncionario()
+{
+    return DB::table('venda_funcionario')
+        ->join('funcionario', 'venda_funcionario.funcionario_id', '=', 'funcionario.id')
+        ->select('funcionario.nome as categoria', DB::raw('COUNT(*) as quantidade_vendida'))
+        ->groupBy('categoria')
+        ->orderByDesc('quantidade_vendida')
+        ->take(4)
+        ->get();
+}
+
+public function getDadosPorEstado()
+{
+    return DB::table('venda_estado')
+        ->join('estado', 'venda_estado.estado_id', '=', 'estado.id')
+        ->select('estado.nome as categoria', DB::raw('COUNT(*) as quantidade_vendida'))
+        ->groupBy('categoria')
+        ->orderByDesc('quantidade_vendida')
+        ->take(4)
+        ->get();
+}
+
 }

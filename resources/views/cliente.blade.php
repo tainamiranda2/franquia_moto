@@ -24,6 +24,26 @@
                 <label for="name" class="form-label">Telefone:</label>
                 <input required type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone">
             </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">CEP:</label>
+                <input  required type="text" class="form-control" id="cep" name="cep" placeholder="Digite o cep">
+            </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">Estado:</label>
+                <input required type="text" class="form-control" id="estado" name="estado" placeholder="Digite o estado">
+            </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">Cidade:</label>
+                <input required type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade">
+            </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">Bairro:</label>
+                <input required type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro">
+            </div>
+            <div class="col-md-6 col-md">
+                <label for="name" class="form-label">Rua:</label>
+                <input  required type="text" class="form-control" id="rua" name="rua" placeholder="Digite a rua">
+            </div>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-save">Salvar</button>

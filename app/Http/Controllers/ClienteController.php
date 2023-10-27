@@ -16,7 +16,12 @@ class ClienteController extends Controller
         $cliente->nome=$request->nome;
         $cliente->email=$request->email;
         $cliente->cpf=$request->cpf;
-        $cliente->telefone=$request->telefone;       
+        $cliente->telefone=$request->telefone;     
+        $cliente->estado=$request->estado;
+        $cliente->cidade=$request->cidade;
+        $cliente->bairro=$request->bairro;
+        $cliente->cep=$request->cep;  
+        $cliente->rua=$request->rua;  
 
     $cliente->save();
     return redirect('/analise');
