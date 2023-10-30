@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Venda;
 use App\Loja;
 use App\Moto;
@@ -89,34 +90,36 @@ foreach ($vendasPorLoja as $vendaPorLoja) {
 $dadosParaGraficoPizzaJSON = json_encode($dadosParaGraficoPizza);
 //grafico dois
 
-$filtro = $request->input('filtro');
-$dadosParaGrafico = []; 
 
 
-if ($filtro == 'mota') {
     // Consulta para obter as informações relacionadas a motas
-    $dadosParaGrafico = $this->getDadosPorMota();
-} elseif ($filtro == 'funcionario') {
-    // Consulta para obter as informações relacionadas a funcionários
-    $dadosParaGrafico = $this->getDadosPorFuncionario();
-} elseif ($filtro == 'estado') {
-    // Consulta para obter as informações relacionadas a estados
-    $dadosParaGrafico = $this->getDadosPorEstado();
-}
+   $dadosParaGraficoMoto = $this->getDadosPorMota();
+    $dadosParaGraficoFun = $this->getDadosPorFuncionario();
+$dadosGraficoLoja=$this->getDadosPorLoja();
 
-$dadosParaGraficoJSON = json_encode($dadosParaGrafico);
+$dadosGraficoMoto = json_encode($dadosParaGraficoMoto );
+$dadosGraficoFun = json_encode( $dadosParaGraficoFun);
+$dadosGraficoLoja=json_encode($dadosGraficoLoja);
 
+
+
+//dd($filtro);
+//var_dump($dadosGraficoLoja);
 
     return view('analise', compact( 
-       'dadosParaGraficoJSON',
+        'dadosGraficoFun',
+        'dadosGraficoMoto',
+       'dadosParaGrafico',
+       'dadosGraficoLoja',
+       //novos
         'vendasPorLojaJSON', 
         'vendasPorMes',
         'resultadosPorMes',
-    'vendasPorDiaJSON', 
-    'lojaMaisVendida', 
+     
     'regiaoComMaisVendas',
     'vendasPorLoja', 
     'vendasPorDia',
+    //ta ai
      'motos',
      'motosVendas',
      'dadosParaGraficoPizzaJSON',
@@ -129,98 +132,83 @@ $dadosParaGraficoJSON = json_encode($dadosParaGrafico);
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getDadosPorFuncionario()
     {
-        //
-    }
+        // Obtém o funcionário que mais vendeu no mês atual
+    $funcionarioMaisVendedor = Venda::select('funcionario.nome as nome_funcionario')
+    ->join('funcionario', 'venda.funcionario_id', '=', 'funcionario.id')
+    ->select('funcionario.nome as nome_funcionario', DB::raw('COUNT(*) as quantidade_vendida'))
+    ->whereMonth('venda.created_at', '=', now()->month)
+    ->groupBy('funcionario.nome')
+    ->orderByDesc('quantidade_vendida')
+    ->take(1)
+    ->first();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+// Obtém a quantidade de vendas por dia no mês atual
+$vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
+    ->whereMonth('venda.created_at', '=', now()->month)
+    ->groupBy('data')
+    ->orderBy('data')
+    ->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+// Retorna um array associativo com os resultados
+return [
+    'funcionarioMaisVendedor' => $funcionarioMaisVendedor,
+    'vendasPorDia' => $vendasPorDia,
+];
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
+    
     public function getDadosPorMota()
-{
-    return DB::table('venda_mota')
-        ->join('mota', 'venda_mota.mota_id', '=', 'mota.id')
-        ->select('mota.nome as categoria', DB::raw('COUNT(*) as quantidade_vendida'))
-        ->groupBy('categoria')
+    {
+        // Obtém a moto que mais vendeu no mês atual
+        $motoMaisVendida = Venda::select('moto.nome as nome_moto')
+        ->join('moto', 'venda.moto_id', '=', 'moto.id')
+        ->select('moto.nome as nome_moto', DB::raw('COUNT(*) as quantidade_vendida'))
+        ->whereMonth('venda.created_at', '=', now()->month)
+        ->groupBy('moto.nome')
         ->orderByDesc('quantidade_vendida')
-        ->take(4)
-        ->get();
-}
+        ->take(1)
+        ->first();
 
-public function getDadosPorFuncionario()
+    // Obtém a quantidade de vendas por dia no mês atual
+    $vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
+        ->whereMonth('venda.created_at', '=', now()->month)
+        ->groupBy('data')
+        ->orderBy('data')
+        ->get();
+
+    // Retorna um array associativo com os resultados
+    return [
+        'motoMaisVendida' => $motoMaisVendida,
+        'vendasPorDia' => $vendasPorDia,
+    ];
+    }
+    
+
+public function getDadosPorLoja()
 {
-    return DB::table('venda_funcionario')
-        ->join('funcionario', 'venda_funcionario.funcionario_id', '=', 'funcionario.id')
-        ->select('funcionario.nome as categoria', DB::raw('COUNT(*) as quantidade_vendida'))
-        ->groupBy('categoria')
-        ->orderByDesc('quantidade_vendida')
-        ->take(4)
-        ->get();
-}
+    // Obtém a loja que mais vendeu no mês atual
+    $lojaMaisVendida = Venda::select('loja.nome as nome_loja')
+        ->join('loja', 'venda.loja_id', '=', 'loja.id')
+        ->select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
+        ->whereMonth('venda.created_at', '=', now()->month)
+        ->groupBy('loja.nome')
+        ->orderByDesc('valor_total')
+        ->take(1)
+        ->first();
 
-public function getDadosPorEstado()
-{
-    return DB::table('venda_estado')
-        ->join('estado', 'venda_estado.estado_id', '=', 'estado.id')
-        ->select('estado.nome as categoria', DB::raw('COUNT(*) as quantidade_vendida'))
-        ->groupBy('categoria')
-        ->orderByDesc('quantidade_vendida')
-        ->take(4)
+    // Obtém a quantidade de vendas por dia no mês atual
+    $vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
+        ->whereMonth('venda.created_at', '=', now()->month)
+        ->groupBy('data')
+        ->orderBy('data')
         ->get();
-}
 
+    // Retorna um array associativo com os resultados
+    return [
+        'lojaMaisVendida' => $lojaMaisVendida,
+        'vendasPorDia' => $vendasPorDia,
+    ];
+}
 }
