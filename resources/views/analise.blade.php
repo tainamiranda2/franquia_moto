@@ -52,8 +52,7 @@
       <p>Saída - {{$motosVendas}}</p>
       -->
       <div>
-        <!-- Seu botão -->
-<button onclick="filtrar()">Filtrar</button>
+   
 
       </div>
       <div id="barchart_values" style="width: 400px; height: 200px;">
