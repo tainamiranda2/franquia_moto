@@ -104,7 +104,7 @@ $dadosGraficoLoja=json_encode($dadosGraficoLoja);
 
 
 //dd($filtro);
-//var_dump($dadosGraficoLoja);
+var_dump($dadosGraficoFun);
 
     return view('analise', compact( 
         'dadosGraficoFun',
@@ -133,32 +133,29 @@ $dadosGraficoLoja=json_encode($dadosGraficoLoja);
      * @return \Illuminate\Http\Response
      */
 
-    public function getDadosPorFuncionario()
-    {
-        // Obtém o funcionário que mais vendeu no mês atual
-    $funcionarioMaisVendedor = Venda::select('funcionario.nome as nome_funcionario')
-    ->join('funcionario', 'venda.funcionario_id', '=', 'funcionario.id')
-    ->select('funcionario.nome as nome_funcionario', DB::raw('COUNT(*) as quantidade_vendida'))
-    ->whereMonth('venda.created_at', '=', now()->month)
-    ->groupBy('funcionario.nome')
-    ->orderByDesc('quantidade_vendida')
-    ->take(1)
-    ->first();
-
-// Obtém a quantidade de vendas por dia no mês atual
-$vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
-    ->whereMonth('venda.created_at', '=', now()->month)
-    ->groupBy('data')
-    ->orderBy('data')
-    ->get();
-
-// Retorna um array associativo com os resultados
-return [
-    'funcionarioMaisVendedor' => $funcionarioMaisVendedor,
-    'vendasPorDia' => $vendasPorDia,
-];
-    }
-    
+     public function getDadosPorFuncionario()
+     {
+         // Obtém os funcionários e o valor total de vendas no mês atual
+         $dadosFuncionarios = Venda::select('funcionario.nome as nome_funcionario', DB::raw('SUM(venda.valor_total) as valor_total'))
+             ->join('funcionario', 'venda.funcionario_id', '=', 'funcionario.id')
+             ->whereMonth('venda.created_at', '=', now()->month)
+             ->groupBy('funcionario.nome')
+             ->get();
+     
+         // Obtém a quantidade de vendas por dia no mês atual
+         $vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
+             ->whereMonth('venda.created_at', '=', now()->month)
+             ->groupBy('data')
+             ->orderBy('data')
+             ->get();
+     
+         // Retorna um array associativo com os resultados
+         return [
+             'funcionarios' => $dadosFuncionarios,
+             'vendasPorDia' => $vendasPorDia,
+         ];
+     }
+     
     public function getDadosPorMota()
     {
         // Obtém a moto que mais vendeu no mês atual
@@ -185,30 +182,29 @@ return [
     ];
     }
     
-
-public function getDadosPorLoja()
-{
-    // Obtém a loja que mais vendeu no mês atual
-    $lojaMaisVendida = Venda::select('loja.nome as nome_loja')
-        ->join('loja', 'venda.loja_id', '=', 'loja.id')
-        ->select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
-        ->whereMonth('venda.created_at', '=', now()->month)
-        ->groupBy('loja.nome')
-        ->orderByDesc('valor_total')
-        ->take(1)
-        ->first();
-
-    // Obtém a quantidade de vendas por dia no mês atual
-    $vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
-        ->whereMonth('venda.created_at', '=', now()->month)
-        ->groupBy('data')
-        ->orderBy('data')
-        ->get();
-
-    // Retorna um array associativo com os resultados
-    return [
-        'lojaMaisVendida' => $lojaMaisVendida,
-        'vendasPorDia' => $vendasPorDia,
-    ];
-}
+    public function getDadosPorLoja()
+    {
+        // Obtém as lojas e o total vendido por cada uma no mês atual
+        $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
+            ->join('loja', 'venda.loja_id', '=', 'loja.id')
+            ->whereMonth('venda.created_at', '=', now()->month)
+            ->groupBy('loja.nome')
+            ->orderByDesc('valor_total')
+            ->get();
+    
+        // Obtém a quantidade de vendas por dia no mês atual
+        $vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
+            ->whereMonth('venda.created_at', '=', now()->month)
+            ->groupBy('data')
+            ->orderBy('data')
+            ->get();
+    
+        // Retorna um array associativo com os resultados
+        return [
+            'vendasPorLoja' => $vendasPorLoja,
+            'vendasPorDia' => $vendasPorDia,
+        ];
+    }
+    
+    
 }

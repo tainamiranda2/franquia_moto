@@ -60,7 +60,7 @@
                 <select  class="form-control"  name="moto_id" id="moto_id">
                 <option value="">Selecione uma moto</option>
                 @foreach ($motos as $moto)
-                    <option value="{{ $moto->id }}">{{ $moto->modelo }}</option>
+                    <option value="{{ $moto->id }}">{{ $moto->nome }}</option>
                 @endforeach
                 </select>
            

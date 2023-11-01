@@ -2,8 +2,6 @@
 @section('titulo', 'Mdados')
 @section('content')
 @include('layouts.sidebar')
-
-
 <div class="form-container" style="margin: 5px;">
 
   <!-- <div style="padding: 20px;margin: 6vh; margin-right: 25vh; border-radius: 10px;display:flex; flex-direction:column; justify-content: center; align-items: center;">
@@ -32,11 +30,13 @@
 <div class="filtro">
     <label for="opcaoFiltro">Filtrar por:</label>
     <select id="opcaoFiltro">
-        <option value="loja">Lojas</option>
+        <option value="loja">Loja</option>
         <option value="moto">Moto</option>
         <option value="funcionario">Funcionário</option>
+        <input type="checkbox" id="scales" name="scales" checked />
+   
     </select>
-
+ 
     <button onclick="filtrar()">Filtrar</button>
 
 </div>
@@ -48,10 +48,12 @@
     <div id="curve_chart" style="width: 500px; height: 200px"></div>
     </div>
 <!--grafico 3-->
-    <div class="card-produto" style="background: #fff; margin:10px; border-radius: 10px; width:400px">
-    <h1 style="color: #929190;">Estoque geral das lojas</h1>
+    <div class="card-produto" style="background: #fff; margin:10px; border-radius: 10px;">
+   <!-- <h1 style="color: #929190;">Estoque geral das lojas</h1>
       <p>Produtos - {{$motos}}</p>
       <p>Saída - {{$motosVendas}}</p>
+      -->
+      <div id="barchart_values" style="width: 500px; height: 200px;"></div>
     </div>
 
 </div>
@@ -129,70 +131,74 @@ console.log(dadosParaGraficoPizza)
     }
 
     // Função para desenhar o gráfico de funcionário
-    function drawChartFuncionario(dadosGraficoFun) {
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(function() {
-            // Extraia as informações necessárias
-            var funcionarioMaisVendedor = dadosGraficoFun.funcionarioMaisVendedor;
-            var vendasPorDia = dadosGraficoFun.vendasPorDia;
 
-            if (Array.isArray(vendasPorDia)) {
-                // Crie um array para armazenar os dados
-                var data = [['Dia', 'Quantidade de Vendas']];
-
-                // Utilize um loop for para percorrer as vendas por dia
-                for (var i = 0; i < vendasPorDia.length; i++) {
-                    var vendaDia = vendasPorDia[i];
-                    data.push([vendaDia.data, vendaDia.quantidade_vendas]);
-                }
-
-                var options = {
-                    title: 'Funcionário - ' + funcionarioMaisVendedor.nome_funcionario,
-                    isStacked: true,
-                    colors: ['#e53935', '#929190'],
-                    hAxis: {
-                        title: 'Dia'
-                    },
-                    vAxis: {
-                        title: 'Quantidade de Vendas'
-                    }
-                };
-
-                var chart = new google.visualization.ColumnChart(document.getElementById('chat_combinacao'));
-
-                chart.draw(google.visualization.arrayToDataTable(data), options);
-            }
-        });
-    }
 
     //filtro por vendas
   // Função para desenhar o gráfico de loja
+// Função para desenhar o gráfico de loja
 function drawChartLoja(dadosGraficoLoja) {
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(function() {
         // Extraia as informações necessárias
-        var lojaMaisVendida = dadosGraficoLoja.lojaMaisVendida;
+        var vendasPorLoja = dadosGraficoLoja.vendasPorLoja;
         var vendasPorDia = dadosGraficoLoja.vendasPorDia;
 
-        if (Array.isArray(vendasPorDia)) {
+        if (Array.isArray(vendasPorDia) && Array.isArray(vendasPorLoja)) {
             // Crie um array para armazenar os dados
-            var data = [['Dia', 'Quantidade de Vendas']];
+            var data = [['Nome', 'Valor Total']];
 
-            // Utilize um loop for para percorrer as vendas por dia
-            for (var i = 0; i < vendasPorDia.length; i++) {
-                var vendaDia = vendasPorDia[i];
-                data.push([vendaDia.data, vendaDia.quantidade_vendas]);
+            // Utilize um loop for para percorrer as vendas por loja
+            for (var i = 0; i < vendasPorLoja.length; i++) {
+                var vendaLoja = vendasPorLoja[i];
+                data.push([vendaLoja.nome_loja, parseFloat(vendaLoja.valor_total)]);
             }
 
             var options = {
-                title: 'Loja - ' + lojaMaisVendida.nome_loja,
+                title: 'Vendas por Loja',
                 isStacked: true,
                 colors: ['#e53935', '#929190'],
                 hAxis: {
-                    title: 'Dia'
+                    title: 'Nome'
                 },
                 vAxis: {
-                    title: 'Quantidade de Vendas'
+                    title: 'Valor Total'
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chat_combinacao'));
+
+            chart.draw(google.visualization.arrayToDataTable(data), options);
+        }
+    });
+}
+
+// Função para desenhar o gráfico de funcionário
+function drawChartFuncionario(dadosGraficoFun) {
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(function() {
+        // Extraia as informações necessárias
+        var funcionarios = dadosGraficoFun.funcionarios;
+        var vendasPorDia = dadosGraficoFun.vendasPorDia;
+
+        if (Array.isArray(vendasPorDia) && Array.isArray(funcionarios)) {
+            // Crie um array para armazenar os dados
+            var data = [['Nome', 'Valor Total']];
+
+            // Utilize um loop for para percorrer os funcionários
+            for (var i = 0; i < funcionarios.length; i++) {
+                var funcionario = funcionarios[i];
+                data.push([funcionario.nome_funcionario,  parseFloat(funcionario.valor_total)]);
+            }
+
+            var options = {
+                title: 'Vendas por Funcionário',
+                isStacked: true,
+                colors: ['#e53935', '#929190'],
+                hAxis: {
+                    title: 'Nome'
+                },
+                vAxis: {
+                    title: 'Valor Total'
                 }
             };
 
@@ -214,7 +220,7 @@ function drawChartLoja(dadosGraficoLoja) {
             opcaoFiltro = 'loja';
         }
 
-        console.log("Filtrar por: " + opcaoFiltro);
+       // console.log("Filtrar por: " + opcaoFiltro);
 
         // Use um switch para determinar qual função de desenho chamar com base na opção selecionada
         switch (opcaoFiltro) {
@@ -268,4 +274,36 @@ function drawChartLoja(dadosGraficoLoja) {
       </script>
 
 <script src="https://kit.fontawesome.com/02f2b4886a.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Copper", 8.94, "#b87333"],
+        ["Silver", 10.49, "silver"],
+        ["Gold", 19.30, "gold"],
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "A tres motos mais vendidas",
+       // width: 500,
+       // height: 200,
+       // bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+
 @endsection
