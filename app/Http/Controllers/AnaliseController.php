@@ -24,19 +24,6 @@ class AnaliseController extends Controller
             'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
         ];
         
-
-      /*  $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
-        ->join('loja', 'venda.loja_id', '=', 'loja.id')
-        //->whereMonth('venda.created_at', '=', $mesAtual)
-        //->whereYear('venda.created_at', '=', $anoAtual)
-
-        ->groupBy('loja.nome')
-        ->orderBy('loja.nome')
-
-        ->orderByDesc('valor_total')
-        ->take(4)
-        ->get();
-*/
 $vendasPorLoja = Venda::select('loja.nome as nome_loja', DB::raw('SUM(venda.valor_total) as valor_total'))
     ->join('loja', 'venda.loja_id', '=', 'loja.id')
     //->whereMonth('venda.created_at', '=', $mesAtual)
@@ -96,21 +83,25 @@ $dadosParaGraficoPizzaJSON = json_encode($dadosParaGraficoPizza);
    $dadosParaGraficoMoto = $this->getDadosPorMota();
     $dadosParaGraficoFun = $this->getDadosPorFuncionario();
 $dadosGraficoLoja=$this->getDadosPorLoja();
-
+$dadosGraficoMotoTop=$this->getTresMotosMaisVendidas();
+$dadosGraficoVendaMM=$this->getMaiorMenorVendaPorMes();
+//passando para view com json
 $dadosGraficoMoto = json_encode($dadosParaGraficoMoto );
 $dadosGraficoFun = json_encode( $dadosParaGraficoFun);
 $dadosGraficoLoja=json_encode($dadosGraficoLoja);
-
-
+$dadosGraficoMotoTop=json_encode($dadosGraficoMotoTop);
+$dadosGraficoVendaMM=json_encode($dadosGraficoVendaMM);
 
 //dd($filtro);
-var_dump($dadosGraficoFun);
+var_dump($dadosGraficoVendaMM);
 
     return view('analise', compact( 
         'dadosGraficoFun',
         'dadosGraficoMoto',
        'dadosParaGrafico',
        'dadosGraficoLoja',
+       'dadosGraficoMotoTop',
+      'dadosGraficoVendaMM',
        //novos
         'vendasPorLojaJSON', 
         'vendasPorMes',
@@ -205,6 +196,49 @@ var_dump($dadosGraficoFun);
             'vendasPorDia' => $vendasPorDia,
         ];
     }
-    
-    
+    public function getTresMotosMaisVendidas()
+{
+    // Obtém as três motos que mais venderam no mês atual
+    $tresMotosMaisVendidas = Venda::select('moto.nome as nome_moto')
+        ->join('moto', 'venda.moto_id', '=', 'moto.id')
+        ->select('moto.nome as nome_moto', DB::raw('COUNT(*) as quantidade_vendida'))
+        ->whereMonth('venda.created_at', '=', now()->month)
+        ->groupBy('moto.nome')
+        ->orderByDesc('quantidade_vendida')
+        ->take(3) // Obter as três principais
+        ->get();
+
+    // Obtém a quantidade de vendas por dia no mês atual
+    $vendasPorDia = Venda::select(DB::raw('DATE(venda.created_at) as data'), DB::raw('COUNT(*) as quantidade_vendas'))
+        ->whereMonth('venda.created_at', '=', now()->month)
+        ->groupBy('data')
+        ->orderBy('data')
+        ->get();
+
+    // Retorna um array associativo com os resultados
+    return [
+        'tresMotosMaisVendidas' => $tresMotosMaisVendidas,
+        'vendasPorDia' => $vendasPorDia,
+    ];
+}
+public function getMaiorMenorVendaPorMes()
+{
+    // Obtém a maior venda no mês atual
+    $maiorVenda = Venda::select(DB::raw('MAX(valor_total) as maior_venda'))
+        ->whereMonth('created_at', '=', now()->month)
+        ->first();
+
+    // Obtém a menor venda no mês atual
+    $menorVenda = Venda::select(DB::raw('MIN(valor_total) as menor_venda'))
+        ->whereMonth('created_at', '=', now()->month)
+        ->first();
+
+    // Retorna um array associativo com os resultados
+    return [
+        'maiorVenda' => $maiorVenda->maior_venda,
+        'menorVenda' => $menorVenda->menor_venda,
+    ];
+}
+
+
 }

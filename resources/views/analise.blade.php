@@ -31,10 +31,8 @@
     <label for="opcaoFiltro">Filtrar por:</label>
     <select id="opcaoFiltro">
         <option value="loja">Loja</option>
-        <option value="moto">Moto</option>
-        <option value="funcionario">Funcionário</option>
-        <input type="checkbox" id="scales" name="scales" checked />
-   
+       
+        <option value="funcionario">Funcionário</option>   
     </select>
  
     <button onclick="filtrar()">Filtrar</button>
@@ -53,7 +51,14 @@
       <p>Produtos - {{$motos}}</p>
       <p>Saída - {{$motosVendas}}</p>
       -->
-      <div id="barchart_values" style="width: 500px; height: 200px;"></div>
+      <div>
+        <!-- Seu botão -->
+<button onclick="filtrar()">Filtrar</button>
+
+      </div>
+      <div id="barchart_values" style="width: 400px; height: 200px;">
+    
+    </div>
     </div>
 
 </div>
@@ -247,63 +252,96 @@ function drawChartFuncionario(dadosGraficoFun) {
 </script>
 
 
-    <!--grafico 3-->
-    <script>
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-        
-              ['Mês', 'Maior venda no mês', 'Menor venda no mês'],
-            @foreach ($resultadosPorMes as $resultado)
-                ['{{ $resultado->mes }}', {{ $resultado->max ?? 0 }}, {{ $resultado->min ?? 0 }}],
-            @endforeach
-        ]);
-
-        var options = {
-          title: 'Vendas por Mês',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-      </script>
-
-<script src="https://kit.fontawesome.com/02f2b4886a.js" crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
+    <!--grafico 3 para mostrar a maior e menor venda-->
+  <script>
+  google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
+
     function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Copper", 8.94, "#b87333"],
-        ["Silver", 10.49, "silver"],
-        ["Gold", 19.30, "gold"],
-      ]);
+        var dadosGraficoVendaMM = {!! $dadosGraficoVendaMM !!};
+console.log(dadosGraficoVendaMM.maiorVenda)
+        // Verifica se dadosGraficoVendaMM tem as propriedades necessárias
+        if (dadosGraficoVendaMM && dadosGraficoVendaMM.hasOwnProperty('maiorVenda') && dadosGraficoVendaMM.hasOwnProperty('menorVenda')) {
+            var data = google.visualization.arrayToDataTable([
+                ['', 'Maior venda no mês', 'Menor venda no mês'],
+                ['',  dadosGraficoVendaMM.maiorVenda ?? 0, dadosGraficoVendaMM.menorVenda ?? 0 ]
+            ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
+            var options = {
+                title: 'Vendas por Mês',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
 
-      var options = {
-        title: "A tres motos mais vendidas",
-       // width: 500,
-       // height: 200,
-       // bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-      chart.draw(view, options);
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+    }
+</script>
+
+
+<!--grafico das tres motos mais vendidas-->
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    // Aqui você pode inserir a lógica PHP para obter os dados das três motos mais vendidas
+    var dadosMotos = {!! $dadosGraficoMotoTop !!};
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Moto');
+    data.addColumn('number', 'Quantidade Vendida', 'ToolTip');
+
+    // Preencha os dados do PHP para o gráfico
+    for (var i = 0; i < dadosMotos.tresMotosMaisVendidas.length; i++) {
+      var moto = dadosMotos.tresMotosMaisVendidas[i];
+      data.addRow([moto.nome_moto, moto.quantidade_vendida]);
+    }
+
+    var options = {
+      title: 'As Três Motos Mais Vendidas',
+      legend: { position: 'none' },
+      hAxis: {
+        title: 'Quantidade Vendida'
+      },
+      vAxis: {
+        title: 'Moto'
+      }
+    };
+
+    var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
+
+    google.visualization.events.addListener(chart, 'ready', function() {
+      var labels = document.getElementsByTagName('text');
+      Array.prototype.forEach.call(labels, function(label) {
+        if (label.innerHTML === 'start' || label.innerHTML === 'pcx' || label.innerHTML === 'titan verde') {
+          label.setAttribute('x', parseFloat(label.getAttribute('x')) + 15); // Ajuste a posição conforme necessário
+        }
+      });
+    });
+
+    chart.draw(data, options);
   }
-  </script>
+
+
+</script>
+<style>
+    button  {
+        padding: 10px 15px; /* Adapte conforme necessário */
+        background-color: #4CAF50; /* Cor de fundo */
+        color: white; /* Cor do texto */
+        border: none; /* Remove a borda */
+        border-radius: 5px; /* Borda arredondada */
+        cursor: pointer; /* Cursor de ponteiro ao passar por cima */
+    }
+
+
+    button:hover {
+        background-color: #45a049; /* Mudança de cor ao passar por cima */
+    }
+</style>
+
 
 @endsection

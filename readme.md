@@ -61,5 +61,3 @@ php artisan serve
 
 
 
-
-@endsection
